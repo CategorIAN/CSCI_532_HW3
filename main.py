@@ -8,13 +8,13 @@ def f(i):
         print(F)
         print("Initial Flow is {}".format(F.initFlow()))
     if i == 2:
-        G = RandomFlowNetwork(6)
+        G = RandomFlowNetwork(5)
         print("G: {}".format(G))
         f = G.initFlow()
         R = ResidualNetwork(G, f)
         print(R.edges)
-        for path in R.edges:
-            print(path)
+        product = R.edges * R.edges
+        print(product)
 
 
 if __name__ == '__main__':

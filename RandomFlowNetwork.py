@@ -7,7 +7,7 @@ class RandomFlowNetwork(FlowNetwork):
         self.n = n
         self.source = 0
         self.sink = n - 1
-        self.intNodes = list(range(1, n - 1))
+        self.intNodes = set(range(1, n - 1))
         numEdges = random.randint(n // 2, n * n - 2 * n + 2)
         incident_edges = set([self.incidentEdge(True)(self.source)] +
                              list(map(self.incidentEdge(), self.intNodes)) + [self.incidentEdge(False)(self.sink)])
@@ -20,15 +20,15 @@ class RandomFlowNetwork(FlowNetwork):
         head = random.choice([True, False]) if head is None else head
         def f(u):
             if head:
-                v = random.choice(self.intNodes + [self.sink])
+                v = random.choice(tuple(self.intNodes.union({self.sink}).difference({u})))
                 return (u, v)
             else:
-                v = random.choice([self.source] + self.intNodes)
+                v = random.choice(tuple(self.intNodes.union({self.source}).difference({u})))
                 return (v, u)
         return f
 
     def edge(self):
-        u = random.choice([self.source] + self.intNodes + [self.sink])
+        u = random.choice(tuple(self.intNodes.union({self.source, self.sink})))
         head = True if u == self.source else False if u == self.sink else None
         return self.incidentEdge(head)(u)
 
