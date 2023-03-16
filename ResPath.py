@@ -8,6 +8,9 @@ class ResPath:
         self.head = self.path[0]
         self.tail = self.path[-1]
 
+    def __str__(self):
+        return "Path{{{},{},{}}}".format(self.path, self.sign, self.res)
+
     def __mult__(self, other):
         if self.tail == other.head and other.tail not in self.path and self.res * other.res > 0:
             path = self.path + other[1:]
