@@ -11,6 +11,10 @@ class ResPath:
     def __str__(self):
         return "Path{{{},{},{}}}".format(self.path, self.sign, self.res)
 
+    def __repr__(self):
+        return "Path{{{},{},{}}}".format(self.path, self.sign, self.res)
+
+
     def __hash__(self):
         return (self.path, self.sign, self.res)
 

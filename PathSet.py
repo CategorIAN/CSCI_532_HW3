@@ -8,7 +8,10 @@ class PathSet:
 
     def __str__(self):
         combine = lambda p1, p2: str(p1) + "," + str(p2)
-        return "PathSet[" + reduce(combine, self.paths) + "]"
+        return "PathSet[" + reduce(combine, self.paths, "").strip(",") + "]"
+
+    def __repr__(self):
+        return "PathSet" + str(self.paths)
 
     def __hash__(self):
         return self.paths
@@ -25,5 +28,5 @@ class PathSet:
     def filter(self, condition, paths = None):
         paths = self.paths if paths is None else paths
         paths_filtered = [[p] if condition(p) else [] for p in paths]
-        return reduce(lambda l1, l2: l1 + l2, paths_filtered)
+        return reduce(lambda l1, l2: l1 + l2, paths_filtered, [])
 

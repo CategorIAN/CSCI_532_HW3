@@ -13,8 +13,8 @@ def f(i):
         f = G.initFlow()
         R = ResidualNetwork(G, f)
         print(R.edges)
-        product = R.edges * R.edges
-        print(product)
+        print(R.neighbor_edges)
+        print(R.branch(R.neighbor_edges[R.fNetwork.source]))
 
 
 if __name__ == '__main__':

@@ -14,7 +14,7 @@ class RandomFlowNetwork(FlowNetwork):
         more_edges = set([self.edge() for i in range(numEdges - len(incident_edges))])
         edges = incident_edges.union(more_edges)
         capacity = dict(map(lambda e: (e, random.randint(0, 30)), edges))
-        super().__init__(capacity)
+        super().__init__(n, capacity)
 
     def incidentEdge(self, head = None):
         head = random.choice([True, False]) if head is None else head
