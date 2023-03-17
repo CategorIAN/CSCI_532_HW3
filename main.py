@@ -5,24 +5,33 @@ from ResPath import ResPath
 
 def f(i):
     if i == 1:
-        F = RandomFlowNetwork(6)
-        print(F)
-        print("Initial Flow is {}".format(F.initFlow()))
-    if i == 2:
-        G = RandomFlowNetwork(100)
+        G = RandomFlowNetwork(5)
         print("G: {}".format(G))
         f = G.initFlow()
         R = ResidualNetwork(G, f)
         print(R.edges)
         print(R.neighbor_edges)
-        resPath = R.augmentingPath()
+        resPath = R.augmentingPathBFS()
         print(resPath)
         print(R.augmentFlow(resPath))
         print(G.fordFulkerson())
-    if i == 3:
-        p = ResPath((0, 4), (1,), 1, 4)
-        q = ResPath((1, 2), (1,), 1, 4)
-        print(p * q)
+    if i == 2:
+        G = RandomFlowNetwork(5)
+        print("G: {}".format(G))
+        f = G.initFlow()
+        R = ResidualNetwork(G, f)
+        resPath1 = R.augmentingPathBFS()
+        print(resPath1)
+        resPath2 = R.augmentingPathDFS()
+        print(resPath2)
+        print(G.fordFulkerson(DFS = True))
+    if i == 4:
+        G = RandomFlowNetwork(100)
+        f = G.initFlow()
+        R = ResidualNetwork(G, f)
+        resPath = R.augmentingPathBFS()
+        R.augmentFlow(resPath)
+        G.fordFulkerson()
 
 
 if __name__ == '__main__':

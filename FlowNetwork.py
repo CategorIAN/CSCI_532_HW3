@@ -15,13 +15,14 @@ class FlowNetwork:
     def initFlow(self):
         return dict(map(lambda e: (e, 0), self.c.keys()))
 
-    def fordFulkerson(self):
+    def fordFulkerson(self, DFS = True):
+        @tail_recursive
         def go(flow):
             resNetwork = ResidualNetwork(self, flow)
-            resPath = resNetwork.augmentingPath()
+            resPath = resNetwork.augmentingPathDFS() if DFS else resNetwork.augmentingPathBFS()
             if resPath is None:
                 return flow
             else:
-                return go(resNetwork.augmentFlow(resPath, flow))
+                return go.tail_call(resNetwork.augmentFlow(resPath, flow))
         return go(self.initFlow())
 

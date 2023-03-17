@@ -1,5 +1,4 @@
 
-
 class ResPath:
     def __init__(self, path, sign, res, sink):
         self.path = path
@@ -15,14 +14,13 @@ class ResPath:
     def __repr__(self):
         return "Path{{{},{},{}}}".format(self.path, self.sign, self.res, self.sink)
 
-
     def __hash__(self):
         return (self.path, self.sign, self.res, self.sink)
 
     def __lt__(self, other):
         def compare(p, q):
-            return (p[0] < q[0]) or (p[0] == q[0] and compare(p[1:], q[1:]))
-        return len(self.path) < len(other.path) or compare(self.path, other.path)
+            return (len(p) != 0) and ((p[0] < q[0]) or (p[0] == q[0] and compare(p[1:], q[1:])))
+        return len(self.path) < len(other.path) or (len(self.path) == len(other.path) and compare(self.path, other.path))
 
     def __eq__(self, other):
         def compare(p, q):

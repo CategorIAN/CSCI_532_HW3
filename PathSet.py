@@ -1,5 +1,6 @@
 from itertools import product
 from functools import reduce
+from tail_recursive import tail_recursive as tail
 
 class PathSet:
     def __init__(self, paths):
@@ -34,7 +35,7 @@ class PathSet:
         return reduce(lambda l1, l2: l1 + l2, paths_filtered, [])
 
     def finishedPath(self):
-        go = lambda paths: None if len(paths) == 0 else paths[0] if paths[0].isDone() else go(paths[1:])
+        go = tail(lambda paths: None if len(paths) == 0 else paths[0] if paths[0].isDone() else go.tail_call(paths[1:]))
         return go(self.paths)
 
     def isDone(self):
