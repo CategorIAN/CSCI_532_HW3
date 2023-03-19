@@ -13,7 +13,7 @@ class RandomFlowNetwork(FlowNetwork):
                              list(map(self.incidentEdge(), self.intNodes)) + [self.incidentEdge(False)(self.sink)])
         more_edges = set([self.edge() for i in range(numEdges - len(incident_edges))])
         edges = incident_edges.union(more_edges)
-        capacity = dict(map(lambda e: (e, random.randint(0, 30)), edges))
+        capacity = dict(map(lambda e: (e, random.randint(0, 5)), edges))
         super().__init__(n, capacity)
 
     def incidentEdge(self, head = None):

@@ -7,6 +7,7 @@ class ResPath:
         self.sink = sink
         self.head = self.path[0]
         self.tail = self.path[-1]
+        self.traversed = set(self.path[:-1])
 
     def __str__(self):
         return "Path{{{},{},{}}}".format(self.path, self.sign, self.res, self.sink)
@@ -27,9 +28,6 @@ class ResPath:
             return p[0] == q[0] and compare(p[1:], q[1:])
         return len(self.path) == len(other.path) and compare(self.path, other.path)
 
-    def isDone(self):
-        return self.tail == self.sink
-
     def __mul__(self, other):
         if self.isDone():
             return self
@@ -38,6 +36,11 @@ class ResPath:
             sign = self.sign + other.sign
             res = min(self.res, other.res)
             return ResPath(path, sign, res, self.sink)
+
+    def isDone(self):
+        return self.tail == self.sink
+
+
 
 
 

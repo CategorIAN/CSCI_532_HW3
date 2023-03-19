@@ -4,11 +4,9 @@ from tail_recursive import tail_recursive as tail
 
 class PathSet:
     def __init__(self, paths):
-        condition = lambda p: p is not None and p.res != 0
-        self.paths = sorted(self.filter(condition, paths))
+        self.paths = sorted(self.filter(lambda p: p is not None, paths))
 
     def __str__(self):
-        combine = lambda p1, p2: str(p1) + "," + str(p2)
         return "PathSet" + str(self.paths)
 
     def __repr__(self):
@@ -40,4 +38,5 @@ class PathSet:
 
     def isDone(self):
         return len(self.paths) == 0 or reduce(lambda b1, b2: b1 or b2.isDone(), self.paths, False)
+
 

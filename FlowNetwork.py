@@ -1,5 +1,7 @@
 from ResidualNetwork import ResidualNetwork
 from tail_recursive import tail_recursive
+import time
+import pandas as pd
 
 class FlowNetwork:
     def __init__(self, n, capacity):
@@ -15,14 +17,30 @@ class FlowNetwork:
     def initFlow(self):
         return dict(map(lambda e: (e, 0), self.c.keys()))
 
-    def fordFulkerson(self, DFS = True):
+    def fordFulkerson(self, EdKarp, count):
         @tail_recursive
-        def go(flow):
+        def go(flow, i):
+            print("~~~~~~")
             resNetwork = ResidualNetwork(self, flow)
-            resPath = resNetwork.augmentingPathDFS() if DFS else resNetwork.augmentingPathBFS()
+            resPath = resNetwork.augmentingPathBFS() if EdKarp else resNetwork.augmentingPathDFS()
+            #print("++++++++++++++++++++++++++++++")
+            #print("ResPath: {}".format(resPath))
+            #print("++++++++++++++++++++++++++++++")
             if resPath is None:
-                return flow
+                return (flow, i) if count else flow
             else:
-                return go.tail_call(resNetwork.augmentFlow(resPath, flow))
-        return go(self.initFlow())
+                return go.tail_call(resNetwork.augmentFlow(resPath, flow), i + 1)
+        return go(self.initFlow(), 0)
+
+    def appendtime(self, function):
+        def f(*args):
+            start = time.time()
+            result = function(*args)
+            duration = time.time() - start
+            return result + (duration,) if type(result) is tuple else (result, duration)
+        return f
+
+
+
+
 
