@@ -3,14 +3,15 @@ from functools import reduce
 from tail_recursive import tail_recursive as tail
 
 class PathSet:
-    def __init__(self, paths):
-        self.paths = sorted(self.filter(lambda p: p is not None, paths))
+    def __init__(self, paths, sort = True):
+        filtered = self.filter(lambda p: p is not None, paths)
+        self.paths = sorted(filtered) if sort else filtered
 
     def __str__(self):
-        return "PathSet" + str(self.paths)
+        return "PathSet" + "\n" + "\n".join(str(p) for p in self.paths)
 
     def __repr__(self):
-        return "PathSet" + str(self.paths)
+        return "PathSet" + "\n".join(str(p) for p in self.paths)
 
     def __hash__(self):
         return self.paths

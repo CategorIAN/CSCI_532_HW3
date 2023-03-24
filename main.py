@@ -8,6 +8,7 @@ def analysis(first, last, step):
         print("----------------------------------------------------------------------------------------")
         print("Size is {}".format(i))
         G = RandomFlowNetwork(i)
+        print("G: {}".format(G))
         print("DFS")
         DFS = G.appendtime(G.fordFulkerson)(False, True)
         print("BFS")
@@ -54,5 +55,5 @@ def f(i):
 
 
 if __name__ == '__main__':
-    analysis(10, 100, 10)
+    analysis(5, 100, 5)
 

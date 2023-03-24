@@ -23,9 +23,9 @@ class FlowNetwork:
             print("~~~~~~")
             resNetwork = ResidualNetwork(self, flow)
             resPath = resNetwork.augmentingPathBFS() if EdKarp else resNetwork.augmentingPathDFS()
-            #print("++++++++++++++++++++++++++++++")
-            #print("ResPath: {}".format(resPath))
-            #print("++++++++++++++++++++++++++++++")
+            print("++++++++++++++++++++++++++++++")
+            print("ResPath: {}".format(resPath))
+            print("++++++++++++++++++++++++++++++")
             if resPath is None:
                 return (flow, i) if count else flow
             else:
