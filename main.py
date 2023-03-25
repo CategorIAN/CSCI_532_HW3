@@ -1,8 +1,10 @@
 from RandomFlowNetwork import RandomFlowNetwork
 from ResidualNetwork import ResidualNetwork
 from ResPath import ResPath
+from CSVFlowNetwork import CSVFlowNetwork
 import pandas as pd
 import matplotlib.pyplot as plt
+
 
 def analysis(first, last, step, graph = False):
     def f(i):
@@ -60,35 +62,18 @@ def createChart(df = None, file = None):
 
 def f(i):
     if i == 1:
-        G = RandomFlowNetwork(5)
-        print("G: {}".format(G))
-        f = G.initFlow()
-        R = ResidualNetwork(G, f)
-        print(R.edges)
-        print(R.neighbor_edges)
-        resPath = R.augmentingPathBFS()
-        print(resPath)
-        print(R.augmentFlow(resPath))
-        print(G.fordFulkerson())
+        analysis(first = 5, last = 40, step = 5, graph = True)
     if i == 2:
-        G = RandomFlowNetwork(5)
-        print("G: {}".format(G))
-        f = G.initFlow()
-        R = ResidualNetwork(G, f)
-        resPath1 = R.augmentingPathBFS()
-        print(resPath1)
-        resPath2 = R.augmentingPathDFS()
-        print(resPath2)
-    if i == 4:
-        G = RandomFlowNetwork(100)
-        f = G.initFlow()
-        R = ResidualNetwork(G, f)
-        resPath = R.augmentingPathBFS()
-        R.augmentFlow(resPath)
-        G.fordFulkerson()
+        createChart(file = 'Analysis_from_5_to_100.csv')
+    if i == 3:
+        G = RandomFlowNetwork(10)
+        G.toCSV()
+        H = CSVFlowNetwork('FNetwork.csv')
+        print(H)
+        print(H.n)
 
 
 if __name__ == '__main__':
-    #createChart(file = 'Analysis_from_5_to_100.csv')
-    analysis(5, 100, 5, True)
+    f(1)
+
 

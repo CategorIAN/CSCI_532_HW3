@@ -41,8 +41,13 @@ class FlowNetwork:
         return f
 
     def flowSize(self, f):
-        addFlow = lambda s, e: s + f[e] if e[0] == 0 else s
+        addFlow = lambda s, e: s + int(e[0] == 0) * f[e]
         return reduce(addFlow, f.keys(), 0)
+
+    def toCSV(self, file = "FNetwork"):
+        pd.Index(self.c.keys(), name =
+        ('Head', 'Tail')).to_series(name='Capacity').map(lambda e: self.c[e]).to_csv("{}.csv".format(file))
+
 
 
 
