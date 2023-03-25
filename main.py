@@ -57,23 +57,33 @@ def createChart(df = None, file = None):
     plt.show()
 
 
-
-
-
 def f(i):
     if i == 1:
-        analysis(first = 5, last = 40, step = 5, graph = True)
+        G = RandomFlowNetwork(10)
+        print("G: {}".format(G))
+        F = ResidualNetwork(G, G.initFlow())
+        print("DFS Path: {}".format(F.augmentingPathDFS()))
+        print("BFS Path: {}".format(F.augmentingPathBFS()))
     if i == 2:
-        createChart(file = 'Analysis_from_5_to_100.csv')
+        analysis(first = 5, last = 40, step = 5, graph = True)
     if i == 3:
+        createChart(file = 'Analysis_from_5_to_100.csv')
+    if i == 4:
         G = RandomFlowNetwork(10)
         G.toCSV()
         H = CSVFlowNetwork('FNetwork.csv')
         print(H)
         print(H.n)
+    if i == 5:
+        G = RandomFlowNetwork(100)
+        G.toCSV("FNetwork_Size100")
+        H = CSVFlowNetwork("FNetwork_Size100.csv")
+        DFS = G.fordFulkerson(EdKarp=False, count=False)
+        BFS = G.fordFulkerson(EdKarp=True, count=False)
+
 
 
 if __name__ == '__main__':
-    f(1)
+    f(4)
 
 
