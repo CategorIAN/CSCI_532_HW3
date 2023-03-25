@@ -37,7 +37,7 @@ class ResidualNetwork:
     def branch(self, pathset, searched):
         def findNew(ps_s, path):
             newPaths = self.neighbor_paths(path, ps_s[1])
-            return (ps_s[0] + newPaths, ps_s[1].union(set(map(lambda p: p.tail, newPaths))))
+            return (ps_s[0] + newPaths, ps_s[1].union({path.tail}))
         return reduce(findNew, pathset, (PathSet([]), searched))
 
     def augmentingPathBFS(self):

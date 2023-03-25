@@ -10,10 +10,10 @@ class ResPath:
         self.traversed = set(self.path[:-1])
 
     def __str__(self):
-        return "Path{{{}, {}, {}}}".format(self.path, self.res, self.sink)
+        return "Path{{{}, {}}}".format(self.path, self.res)
 
     def __repr__(self):
-        return "Path{{{},{},{}}}".format(self.path, self.res, self.sink)
+        return "Path{{{},{}}}".format(self.path, self.res)
 
     def __hash__(self):
         return (self.path, self.sign, self.res, self.sink)

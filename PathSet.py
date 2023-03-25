@@ -11,7 +11,7 @@ class PathSet:
         return "PathSet" + "\n" + "\n".join(str(p) for p in self.paths)
 
     def __repr__(self):
-        return "PathSet" + "\n".join(str(p) for p in self.paths)
+        return "PathSet" + "\n" + "\n".join(str(p) for p in self.paths)
 
     def __hash__(self):
         return self.paths
