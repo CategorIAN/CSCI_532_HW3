@@ -65,7 +65,7 @@ def f(i):
         print("DFS Path: {}".format(F.augmentingPathDFS()))
         print("BFS Path: {}".format(F.augmentingPathBFS()))
     if i == 2:
-        analysis(first = 5, last = 40, step = 5, graph = True)
+        analysis(first = 5, last = 30, step = 5, graph = True)
     if i == 3:
         createChart(file = 'Analysis_from_5_to_100.csv')
     if i == 4:
@@ -84,6 +84,8 @@ def f(i):
 
 
 if __name__ == '__main__':
-    f(4)
+    for i in range(1, 5):
+        print("####################################################")
+        f(i)
 
 

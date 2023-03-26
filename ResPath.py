@@ -5,8 +5,8 @@ class ResPath:
         self.sign = sign
         self.res = res
         self.sink = sink
-        self.head = self.path[0]
-        self.tail = self.path[-1]
+        self.tail = self.path[0]
+        self.head = self.path[-1]
         self.traversed = set(self.path[:-1])
 
     def __str__(self):
@@ -31,14 +31,14 @@ class ResPath:
     def __mul__(self, other):
         if self.isDone():
             return self
-        elif self.tail == other.head and other.tail not in self.path:
+        elif self.head == other.tail and other.head not in self.path:
             path = self.path + other.path[1:]
             sign = self.sign + other.sign
             res = min(self.res, other.res)
             return ResPath(path, sign, res, self.sink)
 
     def isDone(self):
-        return self.tail == self.sink
+        return self.head == self.sink
 
 
 

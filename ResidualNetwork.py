@@ -31,13 +31,13 @@ class ResidualNetwork:
         return [reduce(combiner, resPathList) for resPathList in resPathByPath.values()]
 
     def neighbor_paths(self, path, searched = set()):
-        onlyNew = lambda p: (p.head not in searched) and (p.tail not in searched)
-        return PathSet([path]) * PathSet(self.filter(onlyNew, self.neighbor_edges[path.tail]))
+        onlyNew = lambda p: (p.tail not in searched) and (p.head not in searched)
+        return PathSet([path]) * PathSet(self.filter(onlyNew, self.neighbor_edges[path.head]))
 
     def branch(self, pathset, searched):
         def findNew(ps_s, path):
             newPaths = self.neighbor_paths(path, ps_s[1])
-            return (ps_s[0] + newPaths, ps_s[1].union({path.tail}))
+            return (ps_s[0] + newPaths, ps_s[1].union({path.head}))
         return reduce(findNew, pathset, (PathSet([]), searched))
 
     def augmentingPathBFS(self):
@@ -65,7 +65,7 @@ class ResidualNetwork:
                     return path
                 else:
                     newPaths = self.neighbor_paths(path, searched).paths
-                    return go.tail_call(newPaths + pathlist[1:], searched.union({path.tail}))
+                    return go.tail_call(newPaths + pathlist[1:], searched.union({path.head}))
         return go(self.neighbor_edges[0].paths, {0})
 
     def augmentFlow(self, resPath, flow = None):
