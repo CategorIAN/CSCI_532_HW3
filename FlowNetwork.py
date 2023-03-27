@@ -46,7 +46,7 @@ class FlowNetwork:
 
     def toCSV(self, file = "FNetwork"):
         pd.Index(self.c.keys(), name =
-        ('Head', 'Tail')).to_series(name='Capacity').map(lambda e: self.c[e]).to_csv("{}.csv".format(file))
+        ('Tail', 'Head')).to_series(name='Capacity').map(lambda e: self.c[e]).to_csv("{}.csv".format(file))
 
 
 
